@@ -15,14 +15,12 @@
 	<script type="text/javascript" src="../javascriptliblibrary/popup.js"></script>
   <script type="text/javascript">
 	  $(function() {
-		  if ($.browser.msie && $.browser.version.substr(0,1)<7)
-		  {
+
 		        $('li').has('ul').mouseover(function(){
 		                $(this).children('ul').show();
 		                }).mouseout(function(){
 		                $(this).children('ul').hide();
 		                })
-		  }
 		});
   </script>
 
@@ -56,16 +54,17 @@
 	<main class="content">
 		<strong>Content:</strong> Sed placerat accumsan ligula. Aliquam felis magna, congue quis, tempus eu, aliquam vitae, ante. Cras neque justo, ultrices at, rhoncus a, facilisis eget, nisl. Quisque vitae pede. Nam et augue. Sed a elit. Ut vel massa. Suspendisse nibh pede, ultrices vitae, ultrices nec, mollis non, nibh. In sit amet pede quis leo vulputate hendrerit. Cras laoreet leo et justo auctor condimentum. Integer id enim. Suspendisse egestas, dui ac egestas mollis, libero orci hendrerit lacus, et malesuada lorem neque ac libero. Morbi tempor pulvinar pede. Donec vel elit.
 	</main><!-- .content -->
+
 		<div class="popup" id="loginForm" >
 			<div class="popup_bg"></div>
 			<div class="form">
-				<form>
+				<form method="post">
 					<h2>Авторизація в сервісі </h2>
 					<input type="text" id="login"  placeholder="Ваш логін">
 					<input type="password" id="password"  placeholder="Ваш пароль">
 					<p style="text-align: center;">
 						<input type="button" onClick="";  value="Авторизуватися">
-						<input type="button" value="Скасувати">
+						<input type="button" onClick="showOffPopup('loginForm')"; value="Скасувати">
 					</p>
 				</form>
 			</div>

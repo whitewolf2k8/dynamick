@@ -4,18 +4,17 @@ $(document).ready(function() {
 	});
 });
 
-function showPopup() {
-	$(".popup").fadeIn(800);
+function showPopup(id ) {
+	$("#"+id).fadeIn(800);
 }
 
-function showOfPopup() {
-	$(".popup").fadeIn(800);
+function showOffPopup(id) {
+	$("#"+id).fadeOut(800);
 }
-
-
 
 function startAutorixathion() {
 	var login=document.getElementById('login');
 	var pass=document.getElementById('password');
 
+	
 }

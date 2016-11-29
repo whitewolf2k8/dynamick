@@ -6,6 +6,7 @@
   <p id="digital_watch" style="float:right; padding-right: 15px;  font-size:13px; font-weight: bold;"></p>
 </div>
 
+
 <ul id="menu">
   <li><a href="#">Главная</a></li>
   <li>
@@ -211,10 +212,9 @@
     <? if(isset($_SESSION["name"])){
         echo  "<a href=\"#\">Вихід</a>";
       }else{
-        echo  "<a onClick=\"showPopup();\">Увійти</a>";
+        echo  "<a onClick=\"showPopup('loginForm');\">Увійти</a>";
       }
     ?>
-
   </li>
 
 </ul>
