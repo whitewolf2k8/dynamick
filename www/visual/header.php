@@ -212,7 +212,7 @@
     <? if(isset($_SESSION["name"])){
         echo  "<a href=\"#\">Вихід</a>";
       }else{
-        echo  "<a onClick=\"showPopup('loginForm');\">Увійти</a>";
+        echo  "<a onClick=\"openAutorizathionForm();\">Увійти</a>";
       }
     ?>
   </li>

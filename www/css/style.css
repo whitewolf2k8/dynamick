@@ -70,3 +70,8 @@ body {
 	font-style: italic;
 	font-weight: bold;
 }
+
+
+.errorfild{
+	background: rgba(212, 3, 3, 0.62);
+}
