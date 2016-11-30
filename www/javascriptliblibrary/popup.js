@@ -15,6 +15,15 @@ function showOffPopup(id) {
 function startAutorixathion() {
 	var login=document.getElementById('login');
 	var pass=document.getElementById('password');
+	$.ajax({
+		 type: "POST",
+		 url: "script\\order.php",
+		 data: {id:mode},
+		 scriptCharset: "CP1251",
+		 success: function(data){
+				 var res = JSON.parse(data);
+			//	 formListRay(res,idRay,id); // распарсим JSON
+			}
+	 });
 
-	
 }
