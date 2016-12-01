@@ -2,7 +2,7 @@
   $stringHeader="Система перегляду динамічних показників";
   $stringFotter='© Головне управління статистики у Миколаївській області, 2012-2013';;
 
-  $nameBd="dynamic line";
+  $nameBd="dynamic_line";
   $userNameBd="UserDynamick";
   $passwordBd="Cgfccrfz75";
 ?>

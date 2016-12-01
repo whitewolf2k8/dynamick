@@ -18,6 +18,7 @@
 	-moz-box-shadow: 0 2px 1px #9c9c9c;
 	-webkit-box-shadow: 0 2px 1px #9c9c9c;
 	box-shadow: 0 2px 1px #9c9c9c;
+	cursor: pointer
 }
 
 #menu li
