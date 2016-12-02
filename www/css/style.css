@@ -56,6 +56,14 @@ body {
 	padding: 30px 10px 24px;
 }
 
+.content h2{
+	padding: 5px;
+	text-align: center;
+	color: rgb(11, 41, 101);
+	font-size: 25px;
+	font-style: italic;
+	font-weight: bold
+}
 /* Footer
 -----------------------------------------------------------------------------*/
 .footer {

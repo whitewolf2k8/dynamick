@@ -16,8 +16,7 @@
       <li>
         <a href="#">CSS</a>
         <ul>
-          <li><a href="#">Пункт 11</a></li>
-          <li><a href="#">Пункт 12</a></li>
+          <li><a href="../logic/user_add.php">Пункт 12</a></li>
           <li><a href="#">Пункт 13</a></li>
           <li><a href="#">Пункт 14</a></li>
 
