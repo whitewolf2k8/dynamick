@@ -16,116 +16,97 @@
   <script type="text/javascript" src="../javascriptliblibrary/jquery.min.js"></script>
 	<script type="text/javascript" src="../jsscript/popup.js"></script>
 	<script type="text/javascript" src="../jsscript/function.js"></script>
-
-	<script type='text/javascript' src="../snow/snow.js"></script>
-
+	<script type="text/javascript" src="../jsscript/js_user_add.js"></script>
 </head>
 
-<body onload="digitalWatch();snow(1);" >
-<div id="snow">	</div>
+<body onload="digitalWatch();" >
 <div class="wrapper">
 	<header class="header">
 		<? require_once("header.php"); ?>
-	</header><!-- .header-->
-
+	</header>
 	<main class="content">
-		<h2 style="	text-align: center;"> Довідник користувачів системи </h2>
-		<div class="item_blue" style="float:left; margin-left:60px; width:310px;" >
-			<h2>Додати користувача</h2>
-			<p>
-				<div class="navigation_left" id='label'>Ім&#8242;я</div>
-				<div class="navigation_right" ><input type="text" style="width:250px;"></div>
-			</p>
-			<div class="clr"></div>
-			<p>
-				<div class="navigation_left" id='label'>Логін</div>
-				<div class="navigation_right" ><input type="text" style="width:250px;"></div>
-			</p>
-			<div class="clr"></div>
-			<p>
-				<div class="navigation_left" id='label'>Пароль</div>
-				<div class="navigation_right" ><input type="text" style="width:250px;"></div>
-			</p>
-			<div class="clr"></div>
-			<p>
-				<div class="navigation_left" id='label'>Відділ</div>
-				<div class="navigation_right" ><select style="width:250px;"></select></div>
-			</p>
+		<form name="adminForm" action="index.php" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="mode" />
+			<h2 style="	text-align: center;"> Довідник користувачів системи </h2>
+			<div class="item_blue" style="float:left; margin-left:60px; width:310px;" >
+				<h2>Додати користувача</h2>
+				<div  id="errorFormUserAdd" class="error" hidden></div>
+				<p>
+					<div class="navigation_left" id='label'>Ім&#8242;я</div>
+					<div class="navigation_right" ><input type="text"  id="nu" style="width:250px;"></div>
+				</p>
+				<div class="clr"></div>
+				<p>
+					<div class="navigation_left" id='label'>Логін</div>
+					<div class="navigation_right" ><input type="text" id="login"  style="width:250px;"></div>
+				</p>
+				<div class="clr"></div>
+				<p>
+					<div class="navigation_left" id='label'>Пароль</div>
+					<div class="navigation_right" ><input type="text" id="password" style="width:250px;"></div>
+				</p>
+				<div class="clr"></div>
+				<p>
+					<div class="navigation_left" id='label'>Відділ</div>
+					<div class="navigation_right" ><select style="width:250px; text-align:center;" id="department" ><? echo $listDepatmentAdd; ?></select></div>
+				</p>
+				<p style="text-align:center;" >
+					<input type="button" value="Збрегти" onclick="userAdd();" >
+					<input type="button" value="Очистити" onclick="cleanFormAdd();" >
+				</p>
+			</div>
 
-			<p style="text-align:center;" >
-				<input type="button" value="Збрегти" >
-				<input type="button" value="Очистити" >
-			</p>
-		</div>
+			<div class="item_blue" style="float:right; margin-right:60px; width:310px;" >
+				<h2>Додати користувача</h2>
+				<p>
+					<div class="navigation_left" id='label'>Ім&#8242;я</div>
+					<div class="navigation_right" ><input type="text" style="width:250px;"></div>
+				</p>
+				<div class="clr"></div>
+				<p>
+					<div class="navigation_left" id='label'>Логін</div>
+					<div class="navigation_right" ><input type="text" style="width:250px;"></div>
+				</p>
+				<div class="clr"></div>
+				<p>
+					<div class="navigation_left" id='label'>Пароль</div>
+					<div class="navigation_right" ><input type="text" style="width:250px;"></div>
+				</p>
+				<div class="clr"></div>
+				<p>
+					<div class="navigation_left" id='label'>Відділ</div>
+					<div class="navigation_right" ><select style="width:250px;"></select></div>
+				</p>
+				<p style="text-align:center;" >
+					<input type="button" value="Збрегти" >
+					<input type="button" value="Очистити" >
+				</p>
+			</div>
+			<div class="clr"></div >
+			<? if(isset($listResult)){ ?>
+				<div align="center">
+					<table id="tableUser">
+						<tr>
+							<th>&nbsp;</th>
+							<th>Ім&#8242;я</th>
+							<th>Логін</th>
+							<th>Пароль(md5)</th>
+							<th>Відділ</th>
+						</tr>
 
-		<div class="item_blue" style="float:right; margin-right:60px; width:310px;" >
-			<h2>Додати користувача</h2>
-			<p>
-				<div class="navigation_left" id='label'>Ім&#8242;я</div>
-				<div class="navigation_right" ><input type="text" style="width:250px;"></div>
-			</p>
-			<div class="clr"></div>
-			<p>
-				<div class="navigation_left" id='label'>Логін</div>
-				<div class="navigation_right" ><input type="text" style="width:250px;"></div>
-			</p>
-			<div class="clr"></div>
-			<p>
-				<div class="navigation_left" id='label'>Пароль</div>
-				<div class="navigation_right" ><input type="text" style="width:250px;"></div>
-			</p>
-			<div class="clr"></div>
-			<p>
-				<div class="navigation_left" id='label'>Відділ</div>
-				<div class="navigation_right" ><select style="width:250px;"></select></div>
-			</p>
-
-			<p style="text-align:center;" >
-				<input type="button" value="Збрегти" >
-				<input type="button" value="Очистити" >
-			</p>
-		</div>
-		 <div class="clr"></div >
-  <div align="center">
-		<table>
-<tr>
-  <th>Company</th>
-  <th>Q1</th>
-  <th>Q2</th>
-  <th>Q3</th>
-  <th>Q4</th>
-  </tr>
- <tr>
-  <td>Microsoft</td>
-  <td>20.3</td>
-  <td>30.5</td>
-  <td>23.5</td>
-  <td>40.3</td>
- </tr>
-<tr>
-  <td>Google</td>
-  <td>50.2</td>
-  <td>40.63</td>
-  <td>45.23</td>
-  <td>39.3</td>
-</tr>
-<tr>
-  <td>Apple</td>
-  <td>25.4</td>
-  <td>30.2</td>
-  <td>33.3</td>
-  <td>36.7</td>
-</tr>
-<tr>
-  <td>IBM</td>
-  <td>20.4</td>
-  <td>15.6</td>
-  <td>22.3</td>
-  <td>29.3</td>
-</tr>
-</table>
-</div>
-
+						<? foreach ($listResult as $key => $value) {
+								echo "<tr id=\"r_".$value["id"]."\">";
+								echo "<td> <input type=\"checkbox\"> </td>";
+								echo "<td><input type=\"text\" value=\"".$value["nu"]."\" ></td>";
+								echo "<td><input type=\"text\" value=\"".$value["name"]."\" ></td>";
+								echo "<td><input type=\"text\" value=\"".$value["password"]."\" ></td>";
+								echo "<td><select>".$value["id_department"]."</select></td>";
+								echo "</tr>";
+						} ?>
+					</table>
+				</div>
+			<? } ?>
+		</form>
 	</main><!-- .content -->
 	<div class="popup" id="loginForm" >
 		<div class="popup_bg"></div>
@@ -133,8 +114,8 @@
 			<form method="post">
 				<h2>Авторизація в сервісі </h2>
 				<div  id="errorLoginForm" class="error" hidden></div>
-				<input type="text" id="login" oninput="cleanElementStyle ('login');"  placeholder="Ваш логін">
-				<input type="password" id="password" oninput="cleanElementStyle('password');"  placeholder="Ваш пароль">
+				<input type="text" id="loginAutor" oninput="cleanElementStyle ('login');"  placeholder="Ваш логін">
+				<input type="password" id="passwordAutor" oninput="cleanElementStyle('password');"  placeholder="Ваш пароль">
 				<p style="text-align: center;">
 					<input type="button" onClick="startAutorizathion();";  value="Авторизуватися">
 					<input type="button" onClick="showOffPopup('loginForm')"; value="Скасувати">

@@ -13,8 +13,8 @@ function showOffPopup(id) {
 }
 
 function openAutorizathionForm() {
-	cleanElement("login");
-	cleanElement("password");
+	cleanElement("loginAutor");
+	cleanElement("passwordAutor");
 	printErrorMessage("errorLoginForm",'');
 	showPopup('loginForm');
 }
@@ -42,8 +42,8 @@ function exitButon() {
 }
 
 function startAutorizathion() {
-	var login=delSpace(document.getElementById('login').value);
-	var pass=delSpace(document.getElementById('password').value);
+	var login=delSpace(document.getElementById('loginAutor').value);
+	var pass=delSpace(document.getElementById('passwordAutor').value);
 	if(login!="" && pass!=""){
 		$.ajax({
 			 type: "POST",
@@ -75,7 +75,7 @@ function startAutorizathion() {
 }
 
 function getNewHeader() {
-	$.post('header.php', function(data) {
+	$.post('../visual/header.php', function(data) {
 		$('.header').html(data);
 	});
 }

@@ -8,7 +8,7 @@
 
 
 <ul id="menu">
-  <li><a href="#">Головна</a></li>
+  <li><a href="../index.php">Головна</a></li>
 
   <li>
     <a href="#">Категории</a>

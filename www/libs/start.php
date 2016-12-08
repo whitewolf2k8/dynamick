@@ -5,6 +5,5 @@
 	{
     session_start();
 	}
-  
 	$link=connectingDb();
 ?>
