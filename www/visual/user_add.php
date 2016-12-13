@@ -78,8 +78,9 @@
 					<div class="navigation_right" ><select style="width:250px;"></select></div>
 				</p>
 				<p style="text-align:center;" >
-					<input type="button" value="Збрегти" >
+					<input type="button" id="saveDtn"  disabled  value="Збрегти" >
 					<input type="button" value="Очистити" >
+					<input type="button" id="delBtn"  disabled value="Видалити" >
 				</p>
 			</div>
 			<div class="clr"></div >
@@ -93,16 +94,15 @@
 							<th>Пароль(md5)</th>
 							<th>Відділ</th>
 						</tr>
-
 						<? foreach ($listResult as $key => $value) {
-								echo "<tr id=\"r_".$value["id"]."\">";
-								echo "<td> <input type=\"checkbox\"> </td>";
-								echo "<td><input type=\"text\" value=\"".$value["nu"]."\" ></td>";
-								echo "<td><input type=\"text\" value=\"".$value["name"]."\" ></td>";
-								echo "<td><input type=\"text\" value=\"".$value["password"]."\" ></td>";
-								echo "<td><select>".$value["id_department"]."</select></td>";
+								echo "<tr id=\"r_".$value["id"]."\" onChange=\"delCheck('".$value[id]."');\" >";
+								echo "<td> <input name=\"checkFlag\" id=\"".$value[id]."\"  type=\"checkbox\"> </td>";
+								echo "<td><input type=\"text\" id=\"n_".$value[id]."\"  value=\"".$value["nu"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
+								echo "<td><input type=\"text\" id=\"l_".$value[id]."\"  value=\"".$value["name"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
+								echo "<td><input type=\"text\" id=\"p_".$value[id]."\" value=\"".$value["password"]."\" onChange=\"onChangeData('".$value[id]."');\" ></td>";
+								echo "<td><select id=\"d_".$value[id]."\" onChange=\"onChangeData('".$value[id]."');\" >".$value["id_department"]."</select></td>";
 								echo "</tr>";
-						} ?>
+						}?>
 					</table>
 				</div>
 			<? } ?>

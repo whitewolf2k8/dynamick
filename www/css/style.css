@@ -148,11 +148,25 @@ body {
 
 }
 
-.item_blue input[type="button"]:hover {
+.item_blue input[type="button"]:hover:enabled {
   background: rgb(105, 89, 73);
 	border:1px solid rgba(27, 14, 13, 0.49);
   text-decoration: none;
 }
+
+.item_blue input[type="button"]:disabled{
+	margin-top:5px;
+	border-radius: 4px;
+	font-family: Arial;
+  font-size: 15px;
+	color: rgb(255, 255, 255);
+  background: rgb(120, 120, 119);
+	border:1px solid rgba(27, 14, 13, 0.49);
+  padding: 5px;
+	/*border-style: none;*/
+
+}
+
 
 
 

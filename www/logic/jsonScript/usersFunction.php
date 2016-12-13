@@ -1,5 +1,6 @@
 <? include_once("../../libs/start.php");
   include_once("../../libs/setting.php");
+  include_once("../../libs/funList.php");
 
   $action = iconv("utf-8","windows-1251",$_POST["action"]);
   $arrResult=array();
@@ -12,7 +13,7 @@
     $department=iconv("utf-8","windows-1251",$_POST["department"]);
 
 
-    $strSelect="SELECT * FROM `users` WHERE `nu` LIKE('%s') AND `name` LIKE('%s') AND `password` LIKE ('%s')";
+    $strSelect="SELECT * FROM `users` WHERE `nu` LIKE('%s') AND `name` LIKE('%s')";
     $strInsert="INSERT INTO `users`( `nu`,`name`, `password`, `id_department`) VALUES ('%s','%s','%s','%s')";
     $result=mysqli_query($link,sprintf($strSelect,$nu,$login,md5($password)));
     if($result){
@@ -31,6 +32,7 @@
   $result=mysqli_query($link,$str);
   if($result){
     while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      $row["id_department"]=getListDeparmtent($link,$row["id_department"]);
       $arrResult["select"][]=$row;
     }
     mysqli_free_result($result);
