@@ -50,4 +50,10 @@
       return '{ ' . join(', ', $result) . ' }';
     }
   }
+
+  function convertStringJSon($str)
+  {
+    return iconv("utf-8","windows-1251",$str);
+  }
+
 ?>

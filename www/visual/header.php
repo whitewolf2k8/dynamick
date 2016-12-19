@@ -8,7 +8,7 @@
 
 
 <ul id="menu">
-  <li><a href="#">Головна</a></li>
+  <li><a href="../index.php">Головна</a></li>
 
   <li>
     <a href="#">Категории</a>
@@ -16,8 +16,7 @@
       <li>
         <a href="#">CSS</a>
         <ul>
-          <li><a href="#">Пункт 11</a></li>
-          <li><a href="#">Пункт 12</a></li>
+          <li><a href="../logic/user_add.php">Пункт 12</a></li>
           <li><a href="#">Пункт 13</a></li>
           <li><a href="#">Пункт 14</a></li>
 
