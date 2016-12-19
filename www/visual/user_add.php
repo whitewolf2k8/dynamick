@@ -25,8 +25,10 @@
 		<? require_once("header.php"); ?>
 	</header>
 	<main class="content">
-		<form name="adminForm" action="index.php" method="post" enctype="multipart/form-data">
+		<form name="adminForm" action="..\logic\user_add.php" method="post" enctype="multipart/form-data">
       <input type="hidden" name="mode" />
+			<div  id="inform_panel" style="text-align:center;"  hidden></div>
+
 			<h2 style="	text-align: center;"> Довідник користувачів системи </h2>
 			<div class="item_blue" style="float:left; margin-left:60px; width:310px;" >
 				<h2>Додати користувача</h2>
@@ -57,30 +59,26 @@
 			</div>
 
 			<div class="item_blue" style="float:right; margin-right:60px; width:310px;" >
-				<h2>Додати користувача</h2>
+				<h2>Пошук користувача</h2>
+				<div  id="errorFormUserUpdate" class="error" hidden></div>
 				<p>
 					<div class="navigation_left" id='label'>Ім&#8242;я</div>
-					<div class="navigation_right" ><input type="text" style="width:250px;"></div>
+					<div class="navigation_right" ><input type="text" name="nameS"  style="width:250px;" value="<? echo $filtr_name; ?>" ></div>
 				</p>
 				<div class="clr"></div>
 				<p>
 					<div class="navigation_left" id='label'>Логін</div>
-					<div class="navigation_right" ><input type="text" style="width:250px;"></div>
-				</p>
-				<div class="clr"></div>
-				<p>
-					<div class="navigation_left" id='label'>Пароль</div>
-					<div class="navigation_right" ><input type="text" style="width:250px;"></div>
+					<div class="navigation_right" ><input type="text" name="loginS" style="width:250px;"  value="<? echo $filtr_login; ?>" ></div>
 				</p>
 				<div class="clr"></div>
 				<p>
 					<div class="navigation_left" id='label'>Відділ</div>
-					<div class="navigation_right" ><select style="width:250px;"></select></div>
+					<div class="navigation_right" ><select name="depS" style="width:250px; text-align:center;"><? echo $listDepatmentFind; ?></select></div>
 				</p>
 				<p style="text-align:center;" >
-					<input type="button" id="saveDtn"  disabled  value="Збрегти" >
-					<input type="button" value="Очистити" >
-					<input type="button" id="delBtn"  disabled value="Видалити" >
+					<input type="button" id="saveBtn"  disabled  value="Збрегти зміни" onclick="updateUserAction();" >
+					<input type="button" id="saveDtn" value="Пошук" onclick="submitForm('finduser')" >
+					<input type="button" id="delBtn"  disabled value="Видалити" onclick="delUserAction();" >
 				</p>
 			</div>
 			<div class="clr"></div >
