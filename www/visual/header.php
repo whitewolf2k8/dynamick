@@ -16,10 +16,9 @@
       <li>
         <a href="#">CSS</a>
         <ul>
-          <li><a href="../logic/user_add.php">Пункт 12</a></li>
-          <li><a href="#">Пункт 13</a></li>
+          <li><a href="../logic/user_add.php">пользователи</a></li>
+          <li><a href="../logic/menu_create.php">пункты меню</a></li>
           <li><a href="#">Пункт 14</a></li>
-
         </ul>
       </li>
       <li>
@@ -50,7 +49,7 @@
         </ul>
       </li>
     </ul>
-      </li>
+  </li>
 
   <li>
     <a href="#">Работы</a>

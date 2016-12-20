@@ -24,3 +24,17 @@ $(function() {
                 $(this).children('ul').hide();
                 })
 });
+
+/*при выводе сообщениея применимы такие типы 0-Успешное выполнение,
+  1-предупрждение , 2 - сверка, 3 - предупреждение */
+function printMessage(id,mess,type) {
+  var types = {0: "info",1: "success",2: "validation",3: "warning"};
+  var x=document.getElementById(id);
+	x.setAttribute('hidden','')
+  x.className=types[type];
+	x.innerHTML="";
+	x.innerHTML=mess;
+	if(mess!=""){
+		x.removeAttribute("hidden");
+	}
+}

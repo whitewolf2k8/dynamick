@@ -14,5 +14,20 @@
     return $resultingStr;
   }
 
+  function getListMainMenu($link, $id,$mes=" - голвне меню - ")
+  {
+    $resultingStr="";
+    $strQuery="SELECT `id`, `name` FROM `menu` WHERE `path` LIKE('#')";
+    $result=mysqli_query($link,$strQuery);
+    $resultingStr.="<option value=\"0\" ".(($id==0)?"selected":"")." >".$mes."</option>";
+    if($result){
+      while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $resultingStr.="<option value=\"".$row["id"]."\" ".(($id==$row["id"])?"selected":"").
+        " >".$row["name"]."</option>";
+      }
+    }
+    return $resultingStr;
+  }
+
 
 ?>
