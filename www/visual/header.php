@@ -18,7 +18,7 @@
         <ul>
           <li><a href="../logic/user_add.php">пользователи</a></li>
           <li><a href="../logic/menu_create.php">пункты меню</a></li>
-          <li><a href="#">Пункт 14</a></li>
+          <li><a href="../logic/menu_available.php">доступность<br>пунктов меню</a></li>
         </ul>
       </li>
       <li>

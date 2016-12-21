@@ -29,5 +29,21 @@
     return $resultingStr;
   }
 
+  function getListMenu($link, $id,$mes=" - βρ³ - ")
+  {
+    $resultingStr="";
+    $strQuery="SELECT `id`, `name` FROM `menu`";
+    $result=mysqli_query($link,$strQuery);
+    $resultingStr.="<option value=\"0\" ".(($id==0)?"selected":"")." >".$mes."</option>";
+    if($result){
+      while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $resultingStr.="<option value=\"".$row["id"]."\" ".(($id==$row["id"])?"selected":"").
+        " >".$row["name"]."</option>";
+      }
+    }
+    return $resultingStr;
+  }
+
+
 
 ?>
