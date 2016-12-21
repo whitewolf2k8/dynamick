@@ -3,21 +3,21 @@
   require_once("../libs/funList.php");
 
   $filtr_name=(isset($_POST[nameS]))?$_POST[nameS]:'';
-  $filtr_login=(isset($_POST[loginS]))?$_POST[loginS]:'';
-  $filtr_department=(isset($_POST[depS]))?$_POST[depS]:'0';
+  $filtr_path=(isset($_POST[pathS]))?$_POST[pathS]:'';
+  $filtr_mainMenu=(isset($_POST[mainMenuS]))?$_POST[mainMenuS]:'0';
 
   $where=array();
 
   if($filtr_name!=""){
-    $where[]=" nu LIKE('%".$filtr_name."%')";
+    $where[]=" name LIKE('%".$filtr_name."%')";
   }
 
-  if($filtr_login!=""){
-    $where[]=" name LIKE('%".$filtr_login."%')";
+  if($filtr_path!=""){
+    $where[]=" path LIKE('%".$filtr_path."%')";
   }
 
-  if($filtr_department!=0){
-    $where[]=" id_department = ".$filtr_department;
+  if($filtr_mainMenu!=0){
+    $where[]=" perent = ".$filtr_mainMenu;
   }
 
   $whereStr = ( count( $where ) ? ' WHERE ' . implode( ' AND ', $where ) : '' );
@@ -32,10 +32,8 @@
     }
   }
 
-
   $mainListAdd=getListMainMenu($link,0);
-  $listDepatmentAdd=getListDeparmtent($link,0,1);
-  $listDepatmentFind=getListDeparmtent($link,$filtr_department,1,"- βρ³ -");
+  $mainListSearch=getListMainMenu($link,$filtr_mainMenu,'- βρ³ -');
 
   require_once("../visual/menu_create.php");
 ?>

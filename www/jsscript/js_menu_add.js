@@ -23,8 +23,7 @@ function menuAdd() {
 	var list=document.getElementById('parentElementAdd');
   var selectParentntElement =  list.options[list.selectedIndex].value;
   var path = delSpace(document.getElementById('pathAdd').value);
-  var enableElement =document.getElementById('anableAdd').checked;
-
+  var enableElement =((document.getElementById('anableAdd').checked)?1:0);
   if(name!=""&& path!=""){
     $.ajax({
 			 type: "POST",
@@ -33,12 +32,13 @@ function menuAdd() {
 			 scriptCharset: "CP1251",
 			 success: function(data){
 				 var res = JSON.parse(data);
-          /*if((res.error)!=""){
-            printErrorMessage('errorFormUserAdd',res.error);
+          if((res.error)!=""){
+            printErrorMessage('errorFormMenuAdd',res.error);
           }else{
-            fillTableUser(res.select);
+            fillTableMenu(res.select);
+						updateLists(res.listMainMenuAdd,res.listMainMenuSelect);
             cleanFormAdd();
-          }*/
+          }
 				}
 		});
   }else{
@@ -49,25 +49,31 @@ function menuAdd() {
     if(path==""){
       errStr+="Необхідно ввести шлях переадресації.<br>";
     }
-
     printErrorMessage('errorFormMenuAdd',errStr);
   }
 }
 
-function fillTableUser(arr){
-  var table = document.getElementById("tableUser");
+function updateLists(strAdd, strSelect) {
+	var list=document.getElementById('parentElementAdd');
+	list.innerHTML=strAdd;
+	var list=document.getElementById('mainMenuS');
+	list.innerHTML=strSelect;
+}
+
+function fillTableMenu(arr){
+  var table = document.getElementById("tableMenu");
   var htmlTable="";
   table.innerHTML="";
-  htmlTable+="<tr><th>&nbsp;</th><th>Ім&#8242;я</th><th>Логін</th>"+
-    "<th>Пароль(md5)</th><th>Відділ</th></tr>"
+  htmlTable+="<tr><th>&nbsp;</th><th>Назва</th><th>Шлях перенаправлення</th>"
+		+"<th>Батьківський елемент</th><th>Видимість</th></tr>";
   for(var i=0;i<arr.length;i++){
-    htmlTable+="<tr id=\"r_"+arr[i].id+"\" onChange=\"delCheck('"+arr[i].id+"');\" >";
-    htmlTable+="<td> <input name=\"checkFlag\" id=\""+arr[i].id+"\"  type=\"checkbox\"> </td>";
-    htmlTable+="<td><input type=\"text\" id=\"n_"+arr[i].id+"\"  value=\""+arr[i].nu+"\" onChange=\"onChangeData('"+arr[i].id+"');\"  ></td>";
-    htmlTable+="<td><input type=\"text\" id=\"l_"+arr[i].id+"\"  value=\""+arr[i].name+"\" onChange=\"onChangeData('"+arr[i].id+"');\"  ></td>";
-    htmlTable+="<td><input type=\"text\" id=\"p_"+arr[i].id+"\" value=\""+arr[i].password+"\" onChange=\"onChangeData('"+arr[i].id+"');\" ></td>";
-    htmlTable+="<td><select id=\"d_"+arr[i].id+"\" onChange=\"onChangeData('"+arr[i].id+"');\" >"+arr[i].id_department+"</select></td>";
-    htmlTable+="</tr>";
+    htmlTable+="<tr id=\"r_"+arr[i].id+"\">";
+		htmlTable+="<td> <input name=\"checkFlag\" id=\""+arr[i].id+"\"  type=\"checkbox\" onChange=\"delCheck('"+arr[i].id+"');\"> </td>";
+		htmlTable+="<td><input style=\" width:100%; text-align:center; \" type=\"text\" id=\"name_"+arr[i].id+"\"  value=\""+arr[i].name+"\" onChange=\"onChangeData('"+arr[i].id+"');\"  ></td>";
+		htmlTable+="<td><input style=\" width:100%; text-align:center; \" type=\"text\" id=\"path_"+arr[i].id+"\"  value=\""+arr[i].path+"\" onChange=\"onChangeData('"+arr[i].id+"');\"  ></td>";
+		htmlTable+="<td><select style=\" width:100%; text-align:center;\" id=\"parent_"+arr[i].id+"\" onChange=\"onChangeData('"+arr[i].id+"');\" >"+arr[i].perent+"</select></td>";
+		htmlTable+="<td><input type=\"checkbox\" id=\"avaible_"+arr[i].id+"\" onChange=\"onChangeData('"+arr[i].id+"');\" "+((+arr[i].enables==1)?"checked":'')+"  ></td>";
+		htmlTable+="</tr>";
   }
   table.innerHTML=htmlTable;
 }
@@ -152,35 +158,36 @@ function checkedProcess(id) {
 }
 
 function setDisabled(id) {
-  var arr = ["n_","l_","p_","d_"];
+  var arr = ["name_","path_","parent_","avaible_"];
   for(var i=0;i<arr.length;i++){
     document.getElementById(arr[i]+id).setAttribute("disabled", "disabled");
   }
 }
 
 function delDisabled(id) {
-  var arr = ["n_","l_","p_","d_"];
+  var arr = ["name_","path_","parent_","avaible_"];
   for(var i=0;i<arr.length;i++){
     document.getElementById(arr[i]+id).removeAttribute("disabled");
   }
 }
 
-function delUserAction() {
+function delMenuAction() {
   var arr=getIdSelectedForDel();
-  var text="Ви впевнені в тому що хочете видалити "+arr.length+" користувачів ?";
+  var text="Ви впевнені в тому що хочете видалити "+arr.length+" пунтк(тів)?";
   if(confirm(text)){
     $.ajax({
 			 type: "POST",
-			 url: "\\logic\\jsonScript\\usersFunction.php",
+			 url: "\\logic\\jsonScript\\menuFunction.php",
 			 data: {"action":"Del","arrId":arr},
 			 scriptCharset: "CP1251",
 			 success: function(data){
 				 var res = JSON.parse(data);
          printMessage("inform_panel",res.info,0);
           if((res.error)!=""){
-            printErrorMessage('errorFormUserAdd',res.error);
+            printErrorMessage('errorForMenuUpdate',res.error);
           }else{
-            fillTableUser(res.select);
+            fillTableMenu(res.select);
+						updateLists(res.listMainMenuAdd,res.listMainMenuSelect);
             document.getElementById('delBtn').disabled=true;
           }
 				}
@@ -188,29 +195,29 @@ function delUserAction() {
   }
 }
 
-function updateUserAction() {
+function updateMenuAction() {
   var arr=getItemSelectedForUpdate();
-  var text="Ви впевнені в тому що хочете оновити дані "+arr.length+" користувачів ?";
+  var text="Ви впевнені в тому що хочете оновити дані для "+arr.length+" записів ?";
   if(confirm(text)){
     $.ajax({
 			 type: "POST",
-			 url: "\\logic\\jsonScript\\usersFunction.php",
+			 url: "\\logic\\jsonScript\\menuFunction.php",
 			 data: {"action":"Update","arrId":JSON.stringify(arr)},
 			 scriptCharset: "CP1251",
 			 success: function(data){
 				 var res = JSON.parse(data);
          printMessage("inform_panel",res.info,0);
           if((res.error)!=""){
-            printErrorMessage('errorFormUserUpdate',res.error);
+            printErrorMessage('errorForMenuUpdate',res.error);
           }else{
-            fillTableUser(res.select);
+            fillTableMenu(res.select);
+						updateLists(res.listMainMenuAdd,res.listMainMenuSelect);
             document.getElementById('saveBtn').disabled=true;
           }
 				}
 		});
   }
 }
-
 
 function getIdSelectedForDel() {
   var arr = document.getElementsByName("checkFlag");
@@ -226,14 +233,17 @@ function getIdSelectedForDel() {
 function getItemSelectedForUpdate() {
   var arr = document.getElementsByName("checkFlag");
   var arrSelected=[];
-  var arrField = ["n_","l_","p_","d_"];
-
+  var arrField = ["name_","path_","parent_","avaible_"];
   for (var i = 0; i < arr.length; i++) {
     if(arr[i].checked){
       var ItemContent=[];
       var id=arr[i].id;
       for(var j=0;j<arrField.length;j++){
         var name=arrField[j];
+				if(arrField[j]=="avaible_"){
+					ItemContent[j]=((document.getElementById(arrField[j]+id).checked)?1:0);
+					continue;
+				}
         ItemContent[j]=document.getElementById(arrField[j]+id).value;
       }
       ItemContent[arrField.length]=id;

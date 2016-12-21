@@ -41,7 +41,7 @@
 				<div class="clr"></div>
 				<p>
 					<div class="navigation_left" style="text-align:center;" id='label'>Батіківський<br>елемент</div>
-					<div class="navigation_right" ><select style="width:240px; text-align:center;" id="parentElementAdd"><? echo $mainListAdd; ?></select></div>
+					<div class="navigation_right" ><select style="width:242px; text-align:center;" id="parentElementAdd"><? echo $mainListAdd; ?></select></div>
 				</p>
 				<div class="clr"></div>
 				<p>
@@ -65,33 +65,35 @@
 				</p>
 			</div>
 
-			<div class="item_blue" style="float:right; margin-right:60px; width:310px;" >
-				<h2>Пошук користувача</h2>
-				<div  id="errorFormUserUpdate" class="error" hidden></div>
+			<div class="item_blue" style="float:right; margin-right:60px; width:350px;" >
+				<h2>Пошук пунта меню</h2>
+				<div  id="errorForMenuUpdate" class="error" hidden></div>
 				<p>
-					<div class="navigation_left" id='label'>Ім&#8242;я</div>
-					<div class="navigation_right" ><input type="text" name="nameS"  style="width:250px;" value="<? echo $filtr_name; ?>" ></div>
+					<div class="navigation_left" id='label'>Назва пункту</div>
+					<div class="navigation_right" ><input type="text" name="nameS"  style="width:240px;" value="<? echo $filtr_name; ?>" ></div>
 				</p>
 				<div class="clr"></div>
 				<p>
-					<div class="navigation_left" id='label'>Логін</div>
-					<div class="navigation_right" ><input type="text" name="loginS" style="width:250px;"  value="<? echo $filtr_login; ?>" ></div>
+					<div class="navigation_left" id='label'>Шлях<br>відкриття</div>
+					<div class="navigation_right" ><input type="text" name="pathS" style="width:240px;"  value="<? echo $filtr_path; ?>" ></div>
 				</p>
 				<div class="clr"></div>
 				<p>
-					<div class="navigation_left" id='label'>Відділ</div>
-					<div class="navigation_right" ><select name="depS" style="width:250px; text-align:center;"><? echo $listDepatmentFind; ?></select></div>
+					<div class="navigation_left" id='label'>Батіківський<br>елемент</div>
+					<div class="navigation_right" ><select name="mainMenuS" id ='mainMenuS' style="width:242px; text-align:center;"><? echo $mainListSearch; ?></select></div>
 				</p>
+				<div class="clr"></div>
 				<p style="text-align:center;" >
-					<input type="button" id="saveBtn"  disabled  value="Збрегти зміни" onclick="updateUserAction();" >
+					<input type="button" id="saveBtn"  disabled  value="Збрегти зміни" onclick="updateMenuAction();" >
 					<input type="button" id="saveDtn" value="Пошук" onclick="submitForm('finduser')" >
-					<input type="button" id="delBtn"  disabled value="Видалити" onclick="delUserAction();" >
+					<input type="button" id="delBtn"  disabled value="Видалити" onclick="delMenuAction();" >
 				</p>
 			</div>
+
 			<div class="clr"></div >
 			<? if(isset($listResult)){ ?>
 				<div align="center">
-					<table id="tableUser">
+					<table id="tableMenu">
 						<tr>
 							<th>&nbsp;</th>
 							<th>Назва</th>
@@ -102,9 +104,9 @@
 						<? foreach ($listResult as $key => $value) {
 								echo "<tr id=\"r_".$value["id"]."\">";
 								echo "<td> <input name=\"checkFlag\" id=\"".$value[id]."\"  type=\"checkbox\" onChange=\"delCheck('".$value[id]."');\"> </td>";
-								echo "<td><input style=\" width:100%; \" type=\"text\" id=\"name_".$value[id]."\"  value=\"".$value["name"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
-								echo "<td><input style=\" width:100%; \" type=\"text\" id=\"path_".$value[id]."\"  value=\"".$value["path"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
-								echo "<td><select style=\" width:100%; \" id=\"parent_".$value[id]."\" onChange=\"onChangeData('".$value[id]."');\" >".$value["perent"]."</select></td>";
+								echo "<td><input style=\" width:100%; text-align:center; \" type=\"text\" id=\"name_".$value[id]."\"  value=\"".$value["name"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
+								echo "<td><input style=\" width:100%; text-align:center; \" type=\"text\" id=\"path_".$value[id]."\"  value=\"".$value["path"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
+								echo "<td><select style=\" width:100%; text-align:center;\" id=\"parent_".$value[id]."\" onChange=\"onChangeData('".$value[id]."');\" >".$value["perent"]."</select></td>";
 								echo "<td><input type=\"checkbox\" id=\"avaible_".$value[id]."\" onChange=\"onChangeData('".$value[id]."');\" ".(($value[enables]==1)?"checked":'')."  ></td>";
 								echo "</tr>";
 						}?>
@@ -119,8 +121,8 @@
 			<form method="post">
 				<h2>Авторизація в сервісі </h2>
 				<div  id="errorLoginForm" class="error" hidden></div>
-				<input type="text" id="loginAutor" oninput="cleanElementStyle ('login');"  placeholder="Ваш логін">
-				<input type="password" id="passwordAutor" oninput="cleanElementStyle('password');"  placeholder="Ваш пароль">
+				<input type="text" id="loginAutor" oninput="cleanElementStyle ('loginAutor');"  placeholder="Ваш логін">
+				<input type="password" id="passwordAutor" oninput="cleanElementStyle('passwordAutor');"  placeholder="Ваш пароль">
 				<p style="text-align: center;">
 					<input type="button" onClick="startAutorizathion();";  value="Авторизуватися">
 					<input type="button" onClick="showOffPopup('loginForm')"; value="Скасувати">
