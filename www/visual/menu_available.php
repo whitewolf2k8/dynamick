@@ -12,12 +12,12 @@
 	<link href="../css/messege.css" rel="stylesheet">
 	<link href="../css/digitForm.css" rel="stylesheet">
 	<link href="../css/table.css" rel="stylesheet">
-	<link href="../css/CheckBoxStyle.css" rel="stylesheet">
+
 
   <script type="text/javascript" src="../javascriptliblibrary/jquery.min.js"></script>
 	<script type="text/javascript" src="../jsscript/popup.js"></script>
 	<script type="text/javascript" src="../jsscript/function.js"></script>
-	<script type="text/javascript" src="../jsscript/js_menu_add.js"></script>
+	<script type="text/javascript" src="../jsscript/js_menu_available.js"></script>
 </head>
 
 <body onload="digitalWatch();" >
@@ -30,19 +30,19 @@
       <input type="hidden" name="mode" />
 			<div  id="inform_panel" style="text-align:center;"  hidden></div>
 
-			<h2 style="	text-align: center;"> Таблиця надання доступів до пуктів меню відділам </h2>
+			<h2 style="	text-align:center;"> Таблиця надання доступів до пуктів меню відділам </h2>
 
 			<div class="item_blue" style="float:left; margin-left:60px; width:350px;" >
 				<h2>Додати доступ до пункту меню</h2>
 				<div  id="errorFormMenuAdd" class="error" hidden></div>
 				<p>
 					<div class="navigation_left"id='label'>Назва пункту</div>
-					<div class="navigation_right" ><select style="width:242px; text-align:center;" id="parentElementAdd"><? echo $mainListAdd; ?></select>	</div>
+					<div class="navigation_right" ><select style="width:242px; text-align:center;" id="menuItemAdd"><? echo $mainListAdd; ?></select>	</div>
 				</p>
 				<div class="clr"></div>
 				<p>
 					<div class="navigation_left" style="text-align:center;" id='label'>Відділ</div>
-					<div class="navigation_right" ><select style="width:242px; text-align:center;" id="parentElementAdd"><? echo $mainListDepartmentAdd; ?></select></div>
+					<div class="navigation_right" ><select style="width:242px; text-align:center;" id="departmentItemAdd"><? echo $mainListDepartmentAdd ?></select></div>
 				</p>
 				<div class="clr"></div>
 
@@ -85,16 +85,14 @@
 							<th>&nbsp;</th>
 							<th>Назва</th>
 							<th>Шлях перенаправлення</th>
-							<th>Батьківський елемент</th>
-							<th>Видимість</th>
+							<th>Відділ</th>
 						</tr>
 						<? foreach ($listResult as $key => $value) {
 								echo "<tr id=\"r_".$value["id"]."\">";
 								echo "<td> <input name=\"checkFlag\" id=\"".$value[id]."\"  type=\"checkbox\" onChange=\"delCheck('".$value[id]."');\"> </td>";
-								echo "<td><input style=\" width:100%; text-align:center; \" type=\"text\" id=\"name_".$value[id]."\"  value=\"".$value["name"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
-								echo "<td><input style=\" width:100%; text-align:center; \" type=\"text\" id=\"path_".$value[id]."\"  value=\"".$value["path"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
-								echo "<td><select style=\" width:100%; text-align:center;\" id=\"parent_".$value[id]."\" onChange=\"onChangeData('".$value[id]."');\" >".$value["perent"]."</select></td>";
-								echo "<td><input type=\"checkbox\" id=\"avaible_".$value[id]."\" onChange=\"onChangeData('".$value[id]."');\" ".(($value[enables]==1)?"checked":'')."  ></td>";
+								echo "<td style=\"padding:0 8px 0 8px;\">".$value["name"]."</td>";
+								echo "<td>".$value["path"]."</td>";
+								echo "<td><select style=\" width:100%; text-align:center;\" id=\"dep_".$value[id]."\" onChange=\"onChangeData('".$value[id]."');\" >".$value["department"]."</select></td>";
 								echo "</tr>";
 						}?>
 					</table>

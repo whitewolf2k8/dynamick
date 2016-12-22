@@ -22,12 +22,14 @@
 
   $whereStr = ( count( $where ) ? ' WHERE ' . implode( ' AND ', $where ) : '' );
 
-  $strQuery="SELECT * FROM `menu` ".$whereStr;
+  $strQuery="SELECT t1.id, t3.id as id_d, t2.name, t2.path FROM `menu_available` as t1 left join `menu` as t2 on t2.id=t1.id_menu ".
+    " left join department as t3  on t3.id = t1.id_department".$whereStr;
+
   $result=mysqli_query($link,$strQuery);
   if($result){
     $listResult=array();
     while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-      $row["perent"]=getListMainMenu($link,$row["perent"]);
+      $row["department"]=getListDeparmtent($link,$row["id_d"],"- Âñ³ -");
       $listResult[]=$row;
     }
   }
