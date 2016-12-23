@@ -2,23 +2,19 @@
   require_once("../libs/start.php");
   require_once("../libs/funList.php");
 
-  $filtr_name=(isset($_POST[nameS]))?$_POST[nameS]:'';
-  $filtr_path=(isset($_POST[pathS]))?$_POST[pathS]:'';
-  $filtr_mainMenu=(isset($_POST[mainMenuS]))?$_POST[mainMenuS]:'0';
+  $filtr_menu=(isset($_POST[menuItemSelect]))?$_POST[menuItemSelect]:'0';
+  $filtr_department=(isset($_POST[departmentItemselect]))?$_POST[departmentItemselect]:'';
 
   $where=array();
 
-  if($filtr_name!=""){
-    $where[]=" name LIKE('%".$filtr_name."%')";
+  if($filtr_menu!="0"){
+    $where[]=" id_menu =".$filtr_menu;
   }
 
-  if($filtr_path!=""){
-    $where[]=" path LIKE('%".$filtr_path."%')";
+  if($filtr_department!=""){
+    $where[]="id_department =".$filtr_department;
   }
 
-  if($filtr_mainMenu!=0){
-    $where[]=" perent = ".$filtr_mainMenu;
-  }
 
   $whereStr = ( count( $where ) ? ' WHERE ' . implode( ' AND ', $where ) : '' );
 
@@ -35,9 +31,10 @@
   }
 
   $mainListAdd=getListMenu($link,0,"- не обрано -");
-  $mainListDepartmentAdd=getListDeparmtent($link,0,"- не обрано -");
+  $mainListDepartmentAdd=getListDeparmtent($link,0,"- всі -");
 
-  $mainListSearch=getListMainMenu($link,$filtr_mainMenu,"- не обрано -");
+  $mainListSearch=getListMainMenu($link,$filtr_menu,"- не обрано -");
+  $mainListDepartmentSelect=getListDeparmtentForAvaible($link,$filtr_department,0,"- всі -");
 
   require_once("../visual/menu_available.php");
 ?>

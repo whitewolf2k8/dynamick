@@ -134,6 +134,7 @@ function delCheck(id) {
         }
       }
     }
+		
   }
 }
 
@@ -183,7 +184,7 @@ function updateMenuAction() {
   if(confirm(text)){
     $.ajax({
 			 type: "POST",
-			 url: "\\logic\\jsonScript\\menuFunction.php",
+			 url: "\\logic\\jsonScript\\menuAvailableFunction.php",
 			 data: {"action":"Update","arrId":JSON.stringify(arr)},
 			 scriptCharset: "CP1251",
 			 success: function(data){
@@ -214,22 +215,16 @@ function getIdSelectedForDel() {
 function getItemSelectedForUpdate() {
   var arr = document.getElementsByName("checkFlag");
   var arrSelected=[];
-  var arrField = ["name_","path_","parent_","avaible_"];
+
   for (var i = 0; i < arr.length; i++) {
     if(arr[i].checked){
       var ItemContent=[];
-      var id=arr[i].id;
-      for(var j=0;j<arrField.length;j++){
-        var name=arrField[j];
-				if(arrField[j]=="avaible_"){
-					ItemContent[j]=((document.getElementById(arrField[j]+id).checked)?1:0);
-					continue;
-				}
-        ItemContent[j]=document.getElementById(arrField[j]+id).value;
-      }
-      ItemContent[arrField.length]=id;
+  		var list=document.getElementById('dep_'+arr[i].id);
+			ItemContent[0]=list.options[list.selectedIndex].value;
+      ItemContent[1]=arr[i].id;
       arrSelected.push(ItemContent);
     }
   }
+	console.log(arrSelected);
   return arrSelected;
 }

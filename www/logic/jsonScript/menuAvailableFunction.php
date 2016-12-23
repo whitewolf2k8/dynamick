@@ -43,29 +43,19 @@
     $count=0;
     $array=json_decode($_POST["arrId"]);
 
-    $strUpdate="UPDATE `menu` SET `name`='%s',`perent`=%s,`path`='%s',`enables`=%s WHERE `id`=%s";
+    $strUpdate="UPDATE `menu_available` SET `id_department`=%s WHERE `id`=%s";
     foreach ($array as $key => $value) {
-      if($value[0]!="" && $value[1]!=""){
-        mysqli_query($link,sprintf($strUpdate,convertStringJSon($value[0]),
-          $value[2],convertStringJSon($value[1]),$value[3],$value[4]));
+        mysqli_query($link,sprintf($strUpdate,$value[0],$value[1]));
         $errorMessege.=(mysqli_error($link)!="")?(mysqli_error($link)."<br>"):"";
         if(mysqli_error($link)==""){
           $count++;
         }
-      }
-      if($value[0]==""){
-        $errorMessege.="Назва пункту меню не може бути пустою. <br> ";
-      }
-      if($value[1]==""){
-        $errorMessege.="Шлях перенаправлення не можу бути пустим. <br> ";
-      }
     }
     $infoMessege="В базі данних було оновлено ".$count." запис(ів)";
   }
 
   $strQuery="SELECT t1.id, t3.id as id_d, t2.name, t2.path FROM `menu_available` as t1 left join `menu` as t2 on t2.id=t1.id_menu ".
     " left join department as t3  on t3.id = t1.id_department".$whereStr;
-
   $result=mysqli_query($link,$strQuery);
   if($result){
     $listResult=array();

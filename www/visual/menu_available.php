@@ -53,22 +53,18 @@
 			</div>
 
 			<div class="item_blue" style="float:right; margin-right:60px; width:350px;" >
-				<h2>Пошук пунта меню</h2>
+				<h2>Пошук доступів до пункті меню</h2>
 				<div  id="errorForMenuUpdate" class="error" hidden></div>
 				<p>
-					<div class="navigation_left" id='label'>Назва пункту</div>
-					<div class="navigation_right" ><input type="text" name="nameS"  style="width:240px;" value="<? echo $filtr_name; ?>" ></div>
+					<div class="navigation_left"id='label'>Назва пункту</div>
+					<div class="navigation_right" ><select style="width:242px; text-align:center;" name="menuItemSelect"><? echo $mainListSearch; ?></select>	</div>
 				</p>
 				<div class="clr"></div>
 				<p>
-					<div class="navigation_left" id='label'>Шлях<br>відкриття</div>
-					<div class="navigation_right" ><input type="text" name="pathS" style="width:240px;"  value="<? echo $filtr_path; ?>" ></div>
+					<div class="navigation_left" style="text-align:center;" id='label'>Відділ</div>
+					<div class="navigation_right" ><select style="width:242px; text-align:center;" name="departmentItemselect"><? echo $mainListDepartmentSelect ?></select></div>
 				</p>
 				<div class="clr"></div>
-				<p>
-					<div class="navigation_left" id='label'>Батіківський<br>елемент</div>
-					<div class="navigation_right" ><select name="mainMenuS" id ='mainMenuS' style="width:242px; text-align:center;"><? echo $mainListSearch; ?></select></div>
-				</p>
 				<div class="clr"></div>
 				<p style="text-align:center;" >
 					<input type="button" id="saveBtn"  disabled  value="Збрегти зміни" onclick="updateMenuAction();" >
