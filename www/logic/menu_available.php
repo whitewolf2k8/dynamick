@@ -3,7 +3,7 @@
   require_once("../libs/funList.php");
 
   $filtr_menu=(isset($_POST[menuItemSelect]))?$_POST[menuItemSelect]:'0';
-  $filtr_department=(isset($_POST[departmentItemselect]))?$_POST[departmentItemselect]:'';
+  $filtr_department=(isset($_POST[departmentItemselect]))?$_POST[departmentItemselect]:'-1';
 
   $where=array();
 
@@ -11,7 +11,7 @@
     $where[]=" id_menu =".$filtr_menu;
   }
 
-  if($filtr_department!=""){
+  if($filtr_department!="-1"){
     $where[]="id_department =".$filtr_department;
   }
 

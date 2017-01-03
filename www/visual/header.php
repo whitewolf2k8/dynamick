@@ -1,4 +1,6 @@
-<? include_once("../libs/setting.php"); if(!isset($_SESSION)) include_once("../libs/start.php"); ?>
+<? include_once("../libs/setting.php"); if(!isset($_SESSION)) include_once("../libs/start.php");
+   require("../libs/headerGet.php");
+?>
 
 <h2><? echo $stringHeader; ?><h2>
 <div class="infostrin">
@@ -9,7 +11,8 @@
 
 <ul id="menu">
   <li><a href="../index.php">Головна</a></li>
-
+  <? if(isset($menuRes)) echo $menuRes; ?>
+<!--
   <li>
     <a href="#">Категории</a>
     <ul>
@@ -205,7 +208,7 @@
   <li>
     <a href="#">О нас</a>
   </li>
-
+-->
 
   <li style="float:right;"  >
     <? if(isset($_SESSION["name"])){

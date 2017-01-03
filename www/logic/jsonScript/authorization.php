@@ -16,6 +16,7 @@
         $_SESSION["name"]=$row["name"];
         $_SESSION["nu"]=$row["nu"];
         $_SESSION["id"]=$row["id"];
+        $_SESSION["id_department"]=$row["id_department"];
       }else{
         $errorMessege.="Час сесії сплив, авторизуйтесь знову<br>";
       }
