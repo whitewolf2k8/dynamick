@@ -64,9 +64,7 @@
     function printInfo()
     {
       if($this->listChild!=null){
-        echo $this->name." -- this name  ";
         if($this->listChild!=null){ print_r($this->listChild);}
-        echo "<br>";
       }
     }
     function hasChild()

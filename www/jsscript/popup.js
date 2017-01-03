@@ -38,9 +38,17 @@ function printErrorMessage(id,mess){
 function exitButon() {
 	$.post('\\libs\\stop.php', function(data) {
 		getNewHeader();
+
 	});
+	$(location).attr('href','../index.php');
 }
 
+
+function getNewPage() {
+	$.post('../index.php', function(data) {
+
+	});
+}
 function startAutorizathion() {
 	var login=delSpace(document.getElementById('loginAutor').value);
 	var pass=delSpace(document.getElementById('passwordAutor').value);
@@ -73,6 +81,24 @@ function startAutorizathion() {
 		printErrorMessage('errorLoginForm',err);
 	}
 }
+
+
+function  checkAvaibles() {
+	var path=window.location.href;
+	$.ajax({
+		 type: "POST",
+		 url: "\\logic\\jsonScript\\avaiblePageFunction.php",
+		 data: {"path":path},
+		 scriptCharset: "CP1251",
+		 success: function(data){
+			  var res = JSON.parse(data);
+				if(!res){
+					$(location).attr('href','../logic/ErrorPage.php');
+				}
+			}
+	});
+}
+
 
 function getNewHeader() {
 	$.post('../visual/header.php', function(data) {

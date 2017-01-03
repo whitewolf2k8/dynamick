@@ -20,7 +20,7 @@
 	<script type="text/javascript" src="../jsscript/js_menu_available.js"></script>
 </head>
 
-<body onload="digitalWatch();" >
+<body onload="digitalWatch();checkAvaibles();" >
 <div class="wrapper">
 	<header class="header">
 		<? require_once("header.php"); ?>

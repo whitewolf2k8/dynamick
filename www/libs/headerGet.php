@@ -1,4 +1,4 @@
-<?   require_once("../libs/classmenu.php");
+<?   require_once("../libs/classMenu.php");
 
   function getMein($link,$tree,$id_perent,$arr)
   {
@@ -52,47 +52,37 @@
 
   function createCode($tree)
   {
-    $code="<li>";
-    $code.="<a href=\"".$tree->path."\">".$tree->name."</a>";
-    if($tree->hasChild()){
-      $result="<ul>";
-      foreach ($tree->listChild as $key => $value) {
-        $object=$tree->getItem($key);
-          $result.=createCode($object);
+    if($tree->name!=""){
+      $code="<li>";
+      $code.="<a href=\"".$tree->path."\">".$tree->name."</a>";
+      if($tree->hasChild()){
+        $result="<ul>";
+        foreach ($tree->listChild as $key => $value) {
+          $object=$tree->getItem($key);
+            $result.=createCode($object);
+        }
+        $result.="</ul>";
       }
-      $result.="</ul>";
+      $code.=((isset($result))?$result:'');
+      $code.="</li>";
+      return $code;
     }
-    $code.=((isset($result))?$result:'');
-    $code.="</li>";
-    return $code;
+    return "";
   }
-
-  if(isset ($_SESSION["id"])){
-    $departmnet=$_SESSION["id_department"];
-    $query="SELECT t2.* FROM `menu_available` as t1  LEFT JOIN menu as t2 "
-      ."on t1.`id_menu`=t2.id WHERE t1.`id_department` = 0"
-      ." OR  t1.`id_department` =".$departmnet." GROUP BY t2.id";
-    $result=mysqli_query($link,$query);
-    echo mysqli_error($link);
-    if ($result) {
-      $tree=new treeMenu();
-      while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        $res=getMein($link,$tree,$row["perent"],$row);
-        setChild($res,$row["perent"],$row);
-      }
+  $query="SELECT t2.* FROM `menu_available` as t1  LEFT JOIN menu as t2 "
+    ."on t1.`id_menu`=t2.id WHERE t1.`id_department` = 0"
+    .((isset($_SESSION["id"]))?(" OR  t1.`id_department` =".$_SESSION["id"]):"")." GROUP BY t2.id";
+  $result=mysqli_query($link,$query);
+  echo mysqli_error($link);
+  if ($result) {
+    $tree=new treeMenu();
+    while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+      $res=getMein($link,$tree,$row["perent"],$row);
+      setChild($res,$row["perent"],$row);
+    }
     $menuRes="";
     foreach ($tree->getArrayChild() as $key => $value) {
       $menuRes.=createCode($tree->getElement($key));
     }
-  //  echo $menuRes;
-
-
-    }
   }
-
-
-
-
-
-
 ?>
