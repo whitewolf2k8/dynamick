@@ -1,8 +1,8 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
 	$(".popup_bg").click(function(){
 		$(".popup").fadeOut(800);
 	});
-});
+});*/
 
 function showPopup(id ) {
 	$("#"+id).fadeIn(800);
@@ -17,6 +17,7 @@ function openAutorizathionForm() {
 	cleanElement("passwordAutor");
 	printErrorMessage("errorLoginForm",'');
 	showPopup('loginForm');
+
 }
 
 function cleanElement(id) {
@@ -38,7 +39,6 @@ function printErrorMessage(id,mess){
 function exitButon() {
 	$.post('\\libs\\stop.php', function(data) {
 		getNewHeader();
-
 	});
 	$(location).attr('href','../index.php');
 }
@@ -63,6 +63,7 @@ function startAutorizathion() {
 				 if(res==""){
 					getNewHeader();
 					showOffPopup('loginForm');
+					$(location).attr('href','../index.php');
 				 }else{
 					printErrorMessage('errorLoginForm',res);
 				 }

@@ -9,12 +9,11 @@
 
 .popup_bg {
 	background:rgba(0,0,0,0.4);
-	position:absolute;
+	position:fixed;
 	z-index:1;
 	height:100%;
 	width:100%;
 }
-
 
 .form {
 	top:120px;

@@ -38,3 +38,31 @@ function printMessage(id,mess,type) {
 		x.removeAttribute("hidden");
 	}
 }
+
+$(document).ready(function(){
+ $(window).scroll(function(){
+   if ($(this).scrollTop() > 100) {
+     $('.scrollup').fadeIn();
+   } else {
+     $('.scrollup').fadeOut();
+   }
+ });
+ $('.scrollup').click(function(){
+ $("html, body").animate({ scrollTop: 0 }, 600);
+   return false;
+ });
+});
+
+function submitFormLim(lim){
+  var x = document.getElementsByName("limit");
+    x[0].value=lim;
+  var x = document.getElementsByName("limitstart");
+    x[0].value=0;
+    document.forms['adminForm'].submit();
+}
+
+function submitFormLimStart(limS){
+  var x = document.getElementsByName("limitstart");
+    x[0].value=limS;
+    document.forms['adminForm'].submit();
+}

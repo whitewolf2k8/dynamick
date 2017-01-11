@@ -1,0 +1,48 @@
+
+
+input.file {
+	width: 140px;
+	border: 1px solid #BBB;
+	border-right: 0;
+	color: #888;
+	padding:2px;
+	padding-left:4px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	outline: none;
+}
+
+div.file_upload {
+	width: 80px;
+	height: 19px;
+	background: #7abcff;
+
+	display: inline;
+	position: absolute;
+	overflow: hidden;
+	cursor: pointer;
+	margin-left: 3px;
+	border-radius: 5px;
+
+	font-weight: bold;
+	color: #FFF;
+	text-align: center;
+	padding-top: 4px;
+	padding-bottom: 3px;
+}
+div.file_upload:before {
+	content: 'Обрати';
+	position: absolute;
+	left: 0; right: 0;
+	text-align: center;
+	cursor: pointer;
+}
+
+div.file_upload input {
+	position: relative;
+	height: 10px;
+	width: 250px;
+	display: inline;
+	cursor: pointer;
+	opacity: 0;
+}

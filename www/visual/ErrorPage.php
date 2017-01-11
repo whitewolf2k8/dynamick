@@ -43,8 +43,8 @@
 			<form method="post">
 				<h2>Авторизація в сервісі </h2>
 				<div  id="errorLoginForm" class="error" hidden></div>
-				<input type="text" id="loginAutor" oninput="cleanElementStyle ('login');"  placeholder="Ваш логін">
-				<input type="password" id="passwordAutor" oninput="cleanElementStyle('password');"  placeholder="Ваш пароль">
+				<input type="text" id="loginAutor" oninput="cleanElementStyle ('loginAutor');"  placeholder="Ваш логін">
+				<input type="password" id="passwordAutor" oninput="cleanElementStyle('passwordAutor');"  placeholder="Ваш пароль">
 				<p style="text-align: center;">
 					<input type="button" onClick="startAutorizathion();";  value="Авторизуватися">
 					<input type="button" onClick="showOffPopup('loginForm')"; value="Скасувати">
