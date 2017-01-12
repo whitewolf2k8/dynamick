@@ -10,7 +10,6 @@
   $INFO_MSG="";
 
   if($action=="load"){
-
     $start = microtime(true);
     set_time_limit(90000);
     if (!file_exists($tmpFile=$_FILES["file_upload"]['tmp_name'])) {
@@ -59,7 +58,6 @@
                 $kod = $row["KOD"];
                 $nu = changeCodingPage($row['NU']);
                 mysqli_stmt_execute($stmtInsert);
-
                 $countInsert+=1;
               }
               mysqli_free_result($result);
@@ -78,6 +76,36 @@
         }
       }
     }
+  }
+
+  if($action=="Update"){
+      $count=0;
+      $array=json_decode($_POST["arrId"]);
+      $strUpdate="UPDATE `kved10` SET `sek`='%s',`kod`='%s',`nu`='%s' WHERE `id`=%s";
+      foreach ($array as $key => $value) {
+        if($value[0]!="" && $value[1]!="" && $value[2]!=""){
+          mysqli_query($link,sprintf($strUpdate,convertStringJSon($value[1]),
+            convertStringJSon($value[2]),convertStringJSon($value[3]),
+            convertStringJSon($value[0]),$value[4]));
+          $errorMessege.=(mysqli_error($link)!="")?(mysqli_error($link)."<br>"):"";
+          if(mysqli_error($link)==""){
+            $count++;
+          }
+        }
+        if($value[0]==""){
+          $errorMessege.="Недопустимо щоб поле \"Ім&#8242;я\" було не заповнено. <br> ";
+        }
+        if($value[1]==""){
+          $errorMessege.="Недопустимо щоб поле \"Логін\" було не заповнено. <br> ";
+        }
+        if($value[2]==""){
+          $errorMessege.="Недопустимо щоб поле \"Пароль\" було не заповнено. <br> ";
+        }
+        if($value[3]==""){
+          $errorMessege.="Недопустимо щоб поле \"Відділ\" було не заповнено. <br> ";
+        }
+      }
+      $infoMessege="В базі данних було оновлено ".$count." запис(ів)";
   }
 
 

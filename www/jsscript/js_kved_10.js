@@ -21,9 +21,7 @@ function cleanFormAdd() {
 function loadKved() {
 	var forms= new FormData(document.getElementById("adminForm"));
 	forms.append("action","load");
-
 	showPopup("progressDisplay");
-
 	var myVar = setInterval(function() {
 			ls_ajax_progress();
 	}, 1000);
@@ -32,23 +30,11 @@ function loadKved() {
 			 url: "\\logic\\jsonScript\\kved10Function.php",
 			 data: forms,
 			 scriptCharset: "CP1251",
-			 processData: false,  // tell jQuery not to process the data
+			 processData: false,
   	 	 contentType: false ,
 			 success: function(data){
-				/* var res = JSON.parse(data);
-         console.log(res);*/
-
 				clearInterval(myVar);
 				showOffPopup("progressDisplay");
-
-				/* $('#progress').html('DONE');
-          /*if((res.error)!=""){
-            printErrorMessage('errorFormMenuAdd',res.error);
-          }else{
-            fillTableMenu(res.select);
-						updateLists(res.listMainMenuAdd,res.listMainMenuSelect);
-            cleanFormAdd();
-          }*/
 				}
 		});
 }
@@ -173,14 +159,14 @@ function checkedProcess(id) {
 }
 
 function setDisabled(id) {
-  var arr = ["name_","path_","parent_","avaible_"];
+  var arr = ["kat_","kod_","n_"];
   for(var i=0;i<arr.length;i++){
     document.getElementById(arr[i]+id).setAttribute("disabled", "disabled");
   }
 }
 
 function delDisabled(id) {
-  var arr = ["name_","path_","parent_","avaible_"];
+  var arr = ["kat_","kod_","n_"];
   for(var i=0;i<arr.length;i++){
     document.getElementById(arr[i]+id).removeAttribute("disabled");
   }
@@ -210,25 +196,34 @@ function delMenuAction() {
   }
 }
 
-function updateMenuAction() {
+function updateAction() {
   var arr=getItemSelectedForUpdate();
-  var text="Ви впевнені в тому що хочете оновити дані для "+arr.length+" записів ?";
+	var text="Ви впевнені в тому що хочете оновити дані для "+arr.length+" записів ?";
   if(confirm(text)){
-    $.ajax({
-			 type: "POST",
-			 url: "\\logic\\jsonScript\\menuFunction.php",
-			 data: {"action":"Update","arrId":JSON.stringify(arr)},
-			 scriptCharset: "CP1251",
-			 success: function(data){
+	 var forms= new FormData(document.getElementById("adminForm"));
+	 forms.append("action","Update");
+	 forms.append("ArrId",JSON.stringify(arr));
+	 showPopup("progressDisplay");
+	 var myVar = setInterval(function() {
+			 ls_ajax_progress();
+	 }, 1000);
+		$.ajax({
+				type: "POST",
+				url: "\\logic\\jsonScript\\kved10Function.php",
+				data: forms,
+				scriptCharset: "CP1251",
+				processData: false,
+				contentType: false ,
+				success: function(data){
 				 var res = JSON.parse(data);
-         printMessage("inform_panel",res.info,0);
+         /*printMessage("inform_panel",res.info,0);
           if((res.error)!=""){
             printErrorMessage('errorForMenuUpdate',res.error);
           }else{
             fillTableMenu(res.select);
 						updateLists(res.listMainMenuAdd,res.listMainMenuSelect);
             document.getElementById('saveBtn').disabled=true;
-          }
+          }*/
 				}
 		});
   }
@@ -248,17 +243,13 @@ function getIdSelectedForDel() {
 function getItemSelectedForUpdate() {
   var arr = document.getElementsByName("checkFlag");
   var arrSelected=[];
-  var arrField = ["name_","path_","parent_","avaible_"];
+  var arrField = ["kat_","kod_","n_"];
   for (var i = 0; i < arr.length; i++) {
     if(arr[i].checked){
       var ItemContent=[];
       var id=arr[i].id;
       for(var j=0;j<arrField.length;j++){
         var name=arrField[j];
-				if(arrField[j]=="avaible_"){
-					ItemContent[j]=((document.getElementById(arrField[j]+id).checked)?1:0);
-					continue;
-				}
         ItemContent[j]=document.getElementById(arrField[j]+id).value;
       }
       ItemContent[arrField.length]=id;

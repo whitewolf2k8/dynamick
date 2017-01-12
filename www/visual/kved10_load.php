@@ -84,7 +84,7 @@
 					<div class="navigation_right" ><select name="depS" style="width:250px; text-align:center;"><? echo $listDepatmentFind; ?></select></div>
 				</p>
 				<p style="text-align:center;" >
-					<input type="button" id="saveBtn"  disabled  value="Збрегти зміни" onclick="updateUserAction();" >
+					<input type="button" id="saveBtn"  disabled  value="Збрегти зміни" onclick="updateAction();" >
 					<input type="button" id="saveDtn" value="Пошук" onclick="submitForm('finduser')">
 					<input type="button" id="delBtn"  disabled value="Видалити" onclick="delUserAction();" >
 				</p>
@@ -101,10 +101,10 @@
 						</tr>
 						<? foreach ($listResult as $key => $value) {
 								echo "<tr id=\"r_".$value["id"]."\" onChange=\"delCheck('".$value[id]."');\" >";
-								echo "<td> <input name=\"checkFlag\" id=\"".$value[id]."\"  type=\"checkbox\"> </td>";
-								echo "<td><input type=\"text\" id=\"n_".$value[id]."\"  value=\"".$value["sek"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
-								echo "<td><input type=\"text\" id=\"l_".$value[id]."\"  value=\"".$value["kod"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
-								echo "<td><input type=\"text\" id=\"p_".$value[id]."\" value=\"".$value["nu"]."\" onChange=\"onChangeData('".$value[id]."');\" ></td>";
+								echo "<td><input name=\"checkFlag\" id=\"".$value[id]."\"  type=\"checkbox\"> </td>";
+								echo "<td><input type=\"text\" id=\"kat_".$value[id]."\"  value=\"".$value["sek"]."\" onChange=\"onChangeData('".$value[id]."');\" maxlength=\"1\"  style=\"text-align:center;\" ></td>";
+								echo "<td><input type=\"text\" id=\"kod_".$value[id]."\"  value=\"".$value["kod"]."\" onChange=\"onChangeData('".$value[id]."');\"  ></td>";
+								echo "<td><textarea  id=\"n_".$value[id]."\" onChange=\"onChangeData('".$value[id]."');\" >".$value["nu"]."</textarea></td>";
 								echo "</tr>";
 						}?>
 					</table>
@@ -113,6 +113,9 @@
 			</div>
 		</form>
 	</main><!-- .content -->
+
+
+
 	<div class="popup" id="loginForm" >
 		<div class="popup_bg"></div>
 		<div class="form">
@@ -139,20 +142,14 @@
 						<span class="progress-value" id="progress_value" >0%</span>
 			</div>
 	</div>
-</div><!-- .wrapper -->
+</div>
 
 <div class="scrollup"></div>
 <div id="container">
-
-	<div class="pagination">
-		<p>without gradient</p>
-		<a href="#" class="page">first</a>
-		<a href="#" class="page">2</a>
-		<a href="#" class="page">3</a>
-		<span class="page active">4</span>
-		<a href="#" class="page">5</a>
-		<a href="#" class="page">6</a><a href="#" class="page">last</a>
-	</div>
+ <? if(isset($pagination)){
+	 		echo $pagination;
+		}
+	?>
 </div>
 <footer class="footer">
 	<? require_once("foter.php"); ?>
