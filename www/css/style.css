@@ -4,6 +4,7 @@
 }
 html {
 	height: 100%;
+	width: 100%;
 	min-width:1024px;
 	min-height:800px;
 }
@@ -22,8 +23,13 @@ body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
+
 }
 
+textarea {
+    width:90%;
+    max-width:90%;
+}
 
 /* Header
 -----------------------------------------------------------------------------*/
@@ -34,6 +40,7 @@ body {
 	padding-top: 5px;
 	padding-left:5px;
 	padding-right:5px;
+	overflow: visible;
 }
 
 .header .infostrin{
@@ -175,4 +182,16 @@ body {
 }
 .navigation_right {
 	float:right;
+}
+
+.scrollup{
+ width:40px;
+ height:40px;
+ opacity:0.3;
+ position:fixed;
+ bottom:50px;
+ right:100px;
+ display:none;
+ text-indent:-9999px;
+ background: url('../img/icon_top.png') no-repeat;
 }
