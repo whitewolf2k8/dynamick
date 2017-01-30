@@ -1,4 +1,4 @@
-<?
+<? include_once("setting.php");
   function getListDeparmtent($link, $id,$type=0,$mes=" - не обрано - ")
   {
     $resultingStr="";
@@ -61,6 +61,14 @@
     return $resultingStr;
   }
 
-
+  function getTypeTerritory($id,$mes="- не обрано -")
+  {
+    global $type_ter;
+    $str="<option value=\"-1\" ".(($id=="-1")?"selected":"").">".$mes."</option>";
+    foreach ($type_ter as $key => $value) {
+      $str.="<option ".(($key==$id)?"selected":"")." value=\"".$key."\" >".$value."</option>";
+    }
+    return $str;
+  }
 
 ?>
