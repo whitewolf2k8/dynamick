@@ -164,4 +164,10 @@ function createListPaginator($total,$count=10,$now){
   return $result;
 }
 
+function delAllSpace($str)
+{
+  return str_replace(" ","",$str);
+}
+
+
 ?>

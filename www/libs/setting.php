@@ -5,4 +5,6 @@
   $nameBd="dynamic_line";
   $userNameBd="UserDynamick";
   $passwordBd="Cgfccrfz75";
+
+  $type_ter=array('0' =>"Область",'1' =>"Місто",'2' =>"Район" );
 ?>
