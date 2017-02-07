@@ -61,6 +61,38 @@
     return $resultingStr;
   }
 
+  function getListPeriod($link, $id,$mes=" - не обрано - ")
+  {
+    $resultingStr="";
+    $strQuery="SELECT `id`, `nu` FROM `period` ";
+    $result=mysqli_query($link,$strQuery);
+    $resultingStr.="<option value=\"0\" ".(($id==0)?"selected":"")." >".$mes."</option>";
+    if($result){
+      while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $resultingStr.="<option value=\"".$row["id"]."\" ".(($id==$row["id"])?"selected":"").
+        " >".$row["nu"]."</option>";
+      }
+    }
+    return $resultingStr;
+  }
+
+
+  function getListYear($link, $id,$mes=" - не обрано - ")
+  {
+    $resultingStr="";
+    $strQuery="SELECT `id`, `nu` FROM `year`";
+    $result=mysqli_query($link,$strQuery);
+    $resultingStr.="<option value=\"0\" ".(($id==0)?"selected":"")." >".$mes."</option>";
+    if($result){
+      while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $resultingStr.="<option value=\"".$row["id"]."\" ".(($id==$row["id"])?"selected":"").
+        " >".$row["nu"]."</option>";
+      }
+    }
+    return $resultingStr;
+  }
+
+
   function getTypeTerritory($id,$mes="- не обрано -")
   {
     global $type_ter;
