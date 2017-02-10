@@ -6,6 +6,9 @@
 
   $action=$_POST["action"];
 
+  $periodS= $_POST["action"];
+  $yearS= $_POST["action"];
+
   $ERROR_MSG="";
   $INFO_MSG="";
 
@@ -107,6 +110,14 @@
       }
       $infoMessege="В базі данних було оновлено ".$count." запис(ів)";
   }
+
+
+  set_time_limit(90000);
+
+  $querySelect="";
+
+
+
 
 
 

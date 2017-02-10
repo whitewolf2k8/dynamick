@@ -5,7 +5,53 @@ function submitForm(mode) {
 			form.mode.value = mode;
 			form.submit();
 		}
+}
+
+function getPerioData() {
+	var resArr=[];
+	resArr.length=2;
+	var arrId=["yearS",'periodS']
+	for (var i = 0; i < arrId.length; i++) {
+		var list = document.getElementById(arrId[i]);
+		resArr[i]=list.options[list.selectedIndex].value;
 	}
+	return resArr;
+}
+
+
+function changeAction() {
+	var result = getPerioData();
+	if(result[0]!=0 && result[1]!=0){
+		document.getElementById('selectPeriodBtn').removeAttribute('disabled');
+	}else{
+		document.getElementById('selectPeriodBtn').setAttribute('disabled', "");
+	}
+}
+
+function loadTable() {
+	var result = getPerioData();
+	$.ajax({
+		 type: "POST",
+		 url: "\\logic\\jsonScript\\finResFunction.php",
+		 data: {"action":"","idPeriod":result[1],"idYear":result[2]},
+		 scriptCharset: "CP1251",
+		 success: function(data){
+			 var res = JSON.parse(data);
+
+
+			 //printMessage("inform_panel",res.info,0);
+
+				/*if((res.error)!=""){
+					printErrorMessage('errorForMenuUpdate',res.error);
+				}else{
+					fillTableMenu(res.select);
+					updateLists(res.listMainMenuAdd,res.listMainMenuSelect);
+					document.getElementById('delBtn').disabled=true;
+				}*/
+			}
+	});
+}
+
 
 
 function cleanFormAdd() {

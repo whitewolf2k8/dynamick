@@ -39,13 +39,13 @@
 
 			<h2 style="	text-align: center;"> Фiнансовi результати до оподаткування  </h2>
 			<div class="headInfo" >
-				<h2> за <select name="depS" style="width:250px;">
+				<h2> за <select  id = "periodS" name="periodS" style="width:250px;" onchange="changeAction();">
 					 				<? echo $listPeriod; ?>
 								</select>
-								<select name="depS" style="width:120px;">
+								<select  id = "yearS" name="yearS" style="width:120px;"  onchange="changeAction();">
 									<? echo $listYear; ?>
 								</select>
-							<input type="button" id="saveBtn"  disabled  value="Початич" onclick="updateAction();" >
+							<input type="button" id="selectPeriodBtn"  disabled  value="Початич" onclick="updateAction();" >
 				</h2>
 			</div>
 
